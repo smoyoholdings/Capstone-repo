@@ -1,5 +1,8 @@
-function About() {
-  return <h1>About Page ℹ️</h1>;
+export default function About() {
+  return (
+    <div>
+      <h1>About Page</h1>
+      <p>This is my React capstone project.</p>
+    </div>
+  );
 }
-
-export default About;
