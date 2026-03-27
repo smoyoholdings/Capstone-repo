@@ -1,8 +1,10 @@
-export default function Home() {
+function Home() {
   return (
     <div>
-      <h1>Hello Sipho 👋</h1>
-      <p>Welcome to your Capstone App</p>
+      <h1>Welcome to the Capstone App 🚀</h1>
+      <p>This application demonstrates authentication and routing.</p>
     </div>
   );
 }
+
+export default Home;

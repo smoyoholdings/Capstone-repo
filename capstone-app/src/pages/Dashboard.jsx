@@ -1,52 +1,27 @@
-import { useContext, useState } from "react";
-import { EventContext } from "../context/EventContext";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 
-export default function Dashboard() {
-  const { events, addEvent, deleteEvent } = useContext(EventContext);
-
-  const [name, setName] = useState("");
-  const [date, setDate] = useState("");
-
-  const handleAdd = () => {
-    if (!name || !date) {
-      alert("Fill all fields");
-      return;
-    }
-
-    addEvent({
-      id: Date.now(),
-      name,
-      date,
-    });
-
-    setName("");
-    setDate("");
-  };
+function Dashboard() {
+  const { currentUser, logout } = useContext(AuthContext);
 
   return (
     <div>
       <h1>Dashboard</h1>
 
-      <input
-        placeholder="Event Name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
+      {/* Display user info if logged in */}
+      {currentUser ? (
+        <>
+          <h2>Welcome, {currentUser.name} 👋</h2>
+          <p>Email: {currentUser.email}</p>
 
-      <input
-        type="date"
-        value={date}
-        onChange={(e) => setDate(e.target.value)}
-      />
-
-      <button onClick={handleAdd}>Add Event</button>
-
-      {events.map((event) => (
-        <div key={event.id}>
-          <p>{event.name} - {event.date}</p>
-          <button onClick={() => deleteEvent(event.id)}>Delete</button>
-        </div>
-      ))}
+          {/* Logout button */}
+          <button onClick={logout}>Logout</button>
+        </>
+      ) : (
+        <h2>Please log in first</h2>
+      )}
     </div>
   );
 }
+
+export default Dashboard;
